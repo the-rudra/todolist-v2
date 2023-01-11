@@ -1,4 +1,4 @@
-<%- include("header") %> 
+<%- include("header") %>
     <div class="box" id="heading">
         <h1>
             <%= listTitle %>
@@ -6,19 +6,19 @@
     </div>
 
     <div class="box">
-        <% for(var i=0; i<newListItem.length; i++) { %>
+        <% newListItem.forEach(item=> { %>
+        <form action="/delete" method="post">
             <div class="item">
-                <input type="checkbox">
+                <input type="checkbox" name="checkbox" value="<%=item._id%>" onchange="this.form.submit()">
                 <p>
-                    <%= newListItem[i] %>
+                    <%= item.name %>
                 </p>
             </div>
-            <% } %>
-
-
+        </form>
+            <% }); %>
                 <form class="item" action="/" method="post">
                     <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
                     <button type="submit" name="button" value="<%= listTitle %>">+</button>
                 </form>
     </div>
-<%- include("footer") %> 
+    <%- include("footer") %>
