@@ -9,8 +9,9 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
+const pass = process.env.PASSWORD;
 mongoose.set('strictQuery', false);
-mongoose.connect("mongodb://127.0.0.1:27017/todolistDB");
+mongoose.connect("mongodb+srv://admin-rudra:" + pass + "@cluster0.fsn0ojs.mongodb.net/todolistDB");
 
 const day = date.getDate();
 const itemSchema = new mongoose.Schema({
@@ -98,6 +99,6 @@ app.post("/delete", (req, res) => {
     }
 });
 
-app.listen(3000, function () {
-    console.log("server listening on port 3000");
+app.listen(process.env.PORT || 3000, function () {
+    console.log("server started");
 });
